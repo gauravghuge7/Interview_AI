@@ -1,3 +1,4 @@
+"use client";
 import { Routes, Route } from 'react-router-dom'
 import Landing from '../views/Landing'
 import JobSelection from '../pages/JobSelection'

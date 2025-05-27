@@ -1,4 +1,6 @@
+"use client";
 import React, { useEffect, useRef, useState, useReducer, useCallback } from 'react';
+
     import { createRoot } from 'react-dom/client';
     import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
     import * as faceapi from 'face-api.js';
@@ -244,7 +246,7 @@ import React, { useEffect, useRef, useState, useReducer, useCallback } from 'rea
           }
 
           dispatch({ type: 'SET_NO_FACE_RETRIES', payload: 0 });
-          const canvas = document.createElement('canvas');
+          const canvas = this.document.createElement('canvas');
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
           const context = canvas.getContext('2d');
@@ -442,3 +444,6 @@ import React, { useEffect, useRef, useState, useReducer, useCallback } from 'rea
         </div>
       );
     };
+
+
+    export default Interview
