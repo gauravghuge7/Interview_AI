@@ -1,7 +1,8 @@
 "use client";
+
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation"; // ✅ Fix
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, CheckCircle2, Upload } from "lucide-react";
@@ -27,7 +28,7 @@ export default function JobSelection() {
   const [resumeFile, setResumeFile] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "" });
-  const navigate = useNavigate();
+  const router = useRouter(); // ✅ Correct hook
 
   const handleJobSelect = (job) => {
     setSelectedJob(job);
@@ -66,11 +67,17 @@ export default function JobSelection() {
     data.append("resume", resumeFile);
 
     try {
-      // const res = await axios.post("/getDetails", data);
-
+      // await axios.post("/getDetails", data); // Optional server post
       setIsOpen(false);
-      navigate(`/interview?job=${encodeURIComponent(selectedJob.title)}firstName=${encodeURIComponent(formData.firstName)}&lastName=${encodeURIComponent(formData.lastName)} &email=${encodeURIComponent(formData.email)}`);
-      // alert(res.data.message);
+
+      // ✅ Fixed: use correct query params syntax
+      const query = `job=${encodeURIComponent(selectedJob.title)}&firstName=${encodeURIComponent(
+        formData.firstName
+      )}&lastName=${encodeURIComponent(formData.lastName)}&email=${encodeURIComponent(
+        formData.email
+      )}`;
+
+      router.push(`/interview?${query}`);
     } catch (err) {
       console.error(err);
       alert("Error submitting form.");

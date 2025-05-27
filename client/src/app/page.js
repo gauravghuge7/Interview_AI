@@ -1,20 +1,18 @@
 "use client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Router from "../routes/Router";
 
-export default function Home() {
+import CTASection from "@/components/CTASection";
+import FeaturesSection from "@/components/FeatureSection";
+import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
+
+
+export default function Landing() {
   return (
-    <div className="">
-      
-      <BrowserRouter>
-
-        <Routes>
-          <Route path="/*" element={<Router />} />
-
-        </Routes>
-      </BrowserRouter>
-    
-
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 p-6">
+      <HeroSection />
+      <FeaturesSection />
+      <CTASection />
+      <Footer />
     </div>
   );
 }
